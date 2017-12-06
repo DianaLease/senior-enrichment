@@ -5,7 +5,7 @@ const db = require('../index');
 const Student = require('./student');
 const Campus = require('./campus');
 
-Student.belongsTo(Campus, { as: 'campus'});
+Student.belongsTo(Campus, {foreignKey: {allowNull: false}});
 Campus.hasMany(Student);
 
 // Require all the models
