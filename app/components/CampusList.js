@@ -1,49 +1,42 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchCampuses } from '../reducers/campusesReducer';
 
-export default class CampusList extends Component {
+class CampusList extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      campuses: [],
-      selectedCampus: {}
-    };
-    this.selectCampus = this.selectCampus.bind(this);
+
+    // this.selectCampus = this.selectCampus.bind(this);
     // this.deselectCampus = this.deselectCampus.bind(this);
-  }
 
   componentDidMount() {
-    axios.get('/api/campuses/')
-      .then(res => res.data)
-      .then(campuses => {
-        this.setState({ campuses })
-      });
+    this.props.loadCampuses();
   }
 
-  selectCampus(campusId) {
-    axios.get(`/api/campuses/${campusId}`)
-      .then(res => res.data)
-      .then(campus => this.setState({
-        selectedCampus: campus
-      }));
-  }
+  // selectCampus(campusId) {
+  //   axios.get(`/api/campuses/${campusId}`)
+  //     .then(res => res.data)
+  //     .then(campus => this.setState({
+  //       selectedCampus: campus
+  //     }));
+  // }
 
   // deselectCampus() {
   //   this.setState({ selectedCampus: {} });
   // }
   render() {
+    console.log('props..', this.props)
     return (
       <ul>
         {
-          this.state.campuses.map((campus) => {
+          this.props.campuses.map((campus) => {
             return (
-              <li key={campus.id}>
+              <h2 key={campus.id}>
                 <NavLink to={`/campuses/${campus.id}`}>
                   {campus.name}
                 </NavLink>
-              </li>
+              </h2>
             )
           })
         }
@@ -51,3 +44,22 @@ export default class CampusList extends Component {
     )
   }
 }
+
+
+const mapStateToProps = (storeState) => {
+  return {
+    campuses: storeState.campuses
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadCampuses: function () {
+      dispatch(fetchCampuses());
+    }
+  }
+}
+
+const CampusListContainer = connect(mapStateToProps, mapDispatchToProps)(CampusList);
+
+export default CampusListContainer;

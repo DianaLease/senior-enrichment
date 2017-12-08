@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
-const SingleCampus = (props) => {
-  const campus = props.campus;
-  return (
-    <h2>campus.name</h2>
-    {/* <ul>
-      {
-        props.campuses.map((campus) => {
-          return (
-            <li key={campus.id}>
-              <NavLink to={`/campuses/${campus.id}`}>
-                {campus.name}
-              </NavLink>
-            </li>
-          )
-        })
-      }
-    </ul> */}
-  )
+export default class CampusList extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedCampus: {}
+    };
+  }
+
+  // componentDidMount() {
+  //   axios.get('/api/campuses/:campusId')
+  //     .then(res => res.data)
+  //     .then(selectedCampus => {
+  //       this.setState({ selectedCampus })
+  //     });
+  // }
+
+
+  render() {
+    // console.log(this.state.selectedCampus.name);
+    return (
+      <div>
+        <h2>hi</h2>
+      </div>
+    )
+  }
 }
 
-export default SingleCampus;
