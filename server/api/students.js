@@ -8,6 +8,7 @@ studentRouter.get('/', (req, res, next) => {
     .catch(next);
 });
 
+// TODO the rest of the routes
 
 module.exports = studentRouter;
 
