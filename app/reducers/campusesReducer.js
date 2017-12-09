@@ -2,12 +2,16 @@ import axios from 'axios';
 
 const GET_CAMPUSES = 'GET_CAMPUSES';
 
+// ACTION CREATORS
+
 export const getCampuses = (campuses) => {
   return {
     type: GET_CAMPUSES,
     campuses
   }
 }
+
+// THUNK
 
 export const fetchCampuses = () => {
   return function (dispatch) {
@@ -18,6 +22,8 @@ export const fetchCampuses = () => {
     })
   }
 }
+
+// REDUCER
 
 const campusesReducer = (state = [], action) => {
   switch (action.type) {

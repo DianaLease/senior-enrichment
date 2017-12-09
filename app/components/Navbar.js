@@ -8,12 +8,12 @@ function Navbar (props) {
         <div className="Navbar">
         <button id="campusesbutton">
           <NavLink to={`/campuses`}>
-            <h3>Campuses</h3>
+            <h2>Campuses</h2>
           </NavLink>
         </button>
         <button id="studentsbutton">
           <NavLink to={`/students`}>
-            <h3>Students</h3>
+            <h2>Students</h2>
           </NavLink>
         </button>
           <h1>Margaret Hamilton Interplanetary Academy of JavaScript</h1>

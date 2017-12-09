@@ -3,14 +3,14 @@ const Campus = require('../db/models/campus')
 
 // GET /api/campuses (get all campuses)
 campusRouter.get('/', (req, res, next) => {
-  Campus.findAll()
+  Campus.findAll({include: {all: true}})
     .then(campuses => res.send(campuses))
     .catch(next);
 });
 
 // GET /api/campuses/:campusId (get a campus by id)
 campusRouter.get('/:campusId', (req, res, next) => {
-  Campus.findById(req.params.campusId)
+  Campus.findById(req.params.campusId, { include: { all: true } })
     .then(campus => res.send(campus))
     .catch(next);
 });
@@ -30,7 +30,7 @@ campusRouter.put('/:campusId', (req, res, next) => {
     .catch(next);
 });
 
-// DELETE /api/campuses/:campusId (delete a campus & redirect to all campuses view)
+// DELETE /api/campuses/:campusId (delete a campus) TODO: maybe not redirect?
 campusRouter.delete('/:campusId', (req, res, next) => {
   Campus.findById(req.params.campusId)
     .then(campus => campus.destroy())
