@@ -6,6 +6,8 @@ import CampusList from './CampusList';
 import SingleCampus from './SingleCampus';
 import StudentList from './StudentList';
 import SingleStudent from './SingleStudent';
+import NewStudent from './NewStudent';
+import NewCampus from './NewCampus';
 
 
 const Main = () => {
@@ -18,6 +20,8 @@ const Main = () => {
         <Route path="/campuses/:campusId" component={SingleCampus} />
         <Route exact path="/students" component={StudentList} />
         <Route path="/students/:studentId" component={SingleStudent} />
+        <Route path="/new-student" component={NewStudent} />
+        <Route path="/new-campus" component={NewCampus} />
       </Switch>
     </div>
   )

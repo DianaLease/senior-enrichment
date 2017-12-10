@@ -6,24 +6,31 @@ import { fetchStudents } from '../reducers/studentsReducer';
 class StudentList extends Component {
 
   componentDidMount() {
-    this.props.loadStudents();
+    this.props.getStudents();
   }
 
   render() {
     return (
-      <ul>
-        {
-          this.props.students.map((student) => {
-            return (
-              <h2 key={student.id}>
-                <NavLink to={`/students/${student.id}`}>
-                  {student.name}
-                </NavLink>
-              </h2>
-            )
-          })
-        }
-      </ul>
+      <div>
+        <button id="addStudent">
+          <NavLink to="/new-student">
+          Add New Student
+          </NavLink>
+        </button>
+        <ul>
+          {
+            this.props.students.map((student) => {
+              return (
+                <h2 key={student.id} className="list">
+                  <NavLink to={`/students/${student.id}`}>
+                    {student.name}
+                  </NavLink>
+                </h2>
+              )
+            })
+          }
+        </ul>
+      </div>
     )
   }
 }
@@ -37,7 +44,7 @@ const mapStateToProps = (storeState) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadStudents: function () {
+    getStudents: function () {
       dispatch(fetchStudents());
     }
   }

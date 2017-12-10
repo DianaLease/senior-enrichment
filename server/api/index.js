@@ -12,7 +12,7 @@ apiRouter.use('/hello', (req, res) => res.send({ hello: 'world' }))
 
 apiRouter.use('/campuses', require('./campuses'));
 apiRouter.use('/students', require('./students'));
-apiRouter.use('/', require('./home'));
+
 
 module.exports = apiRouter;
 

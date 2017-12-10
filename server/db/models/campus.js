@@ -21,5 +21,9 @@ const Campus = db.define('campuses', {
   }
 });
 
+Campus.beforeValidate((campusInstance, optionsObj) => {
+  if (!campusInstance.imgUrl) campusInstance.imgUrl = 'https://etadigital.files.wordpress.com/2012/05/apples-space-centre.jpg'
+})
+
 
 module.exports = Campus;

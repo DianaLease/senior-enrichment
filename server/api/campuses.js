@@ -17,6 +17,7 @@ campusRouter.get('/:campusId', (req, res, next) => {
 
 // POST /api/campuses (create new campus)
 campusRouter.post('/', (req, res, next) => {
+  console.log(req.body);
   Campus.create(req.body)
     .then(campus => res.status(201).send(campus))
     .catch(next);

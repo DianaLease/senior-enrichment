@@ -6,12 +6,12 @@ function Navbar (props) {
 
     return (
         <div className="Navbar">
-        <button id="campusesbutton">
+        <button className="nav-button">
           <NavLink to={`/campuses`}>
             <h2>Campuses</h2>
           </NavLink>
         </button>
-        <button id="studentsbutton">
+        <button className="nav-button">
           <NavLink to={`/students`}>
             <h2>Students</h2>
           </NavLink>

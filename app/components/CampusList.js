@@ -6,24 +6,31 @@ import { fetchCampuses } from '../reducers/campusesReducer';
 class CampusList extends Component {
 
   componentDidMount() {
-    this.props.loadCampuses();
+    this.props.getCampuses();
   }
 
   render() {
     return (
-      <ul>
-        {
-          this.props.campuses.map((campus) => {
-            return (
-              <h2 key={campus.id}>
-                <NavLink to={`/campuses/${campus.id}`}>
-                  {campus.name}
-                </NavLink>
-              </h2>
-            )
-          })
-        }
-      </ul>
+      <div>
+        <button id="addCampus">
+          <NavLink to="/new-campus">
+            Add New Campus
+          </NavLink>
+        </button>
+        <ul>
+          {
+            this.props.campuses.map((campus) => {
+              return (
+                <h2 key={campus.id} className="list">
+                  <NavLink to={`/campuses/${campus.id}`}>
+                    {campus.name}
+                  </NavLink>
+                </h2>
+              )
+            })
+          }
+        </ul>
+      </div>
     )
   }
 }
@@ -37,7 +44,7 @@ const mapStateToProps = (storeState) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadCampuses: function () {
+    getCampuses: function () {
       dispatch(fetchCampuses());
     }
   }
