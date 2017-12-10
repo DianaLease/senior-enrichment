@@ -8,6 +8,7 @@ import StudentList from './StudentList';
 import SingleStudent from './SingleStudent';
 import NewStudent from './NewStudent';
 import NewCampus from './NewCampus';
+import EditStudent from './EditStudent';
 
 
 const Main = () => {
@@ -19,9 +20,10 @@ const Main = () => {
         <Route exact path="/campuses" component={CampusList} />
         <Route path="/campuses/:campusId" component={SingleCampus} />
         <Route exact path="/students" component={StudentList} />
-        <Route path="/students/:studentId" component={SingleStudent} />
+        <Route exact path="/students/:studentId" component={SingleStudent} />
         <Route path="/new-student" component={NewStudent} />
         <Route path="/new-campus" component={NewCampus} />
+        <Route path="/students/:studentId/edit" component={EditStudent} />
       </Switch>
     </div>
   )

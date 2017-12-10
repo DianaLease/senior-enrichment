@@ -17,6 +17,7 @@ studentRouter.get('/:studentId', (req, res, next) => {
 
 // POST /api/students (create new student)
 studentRouter.post('/', (req, res, next) => {
+  console.log('entering route', req.body)
   Student.create(req.body)
     .then(student => res.status(201).send(student))
     .catch(next);
@@ -24,9 +25,10 @@ studentRouter.post('/', (req, res, next) => {
 
 // PUT /api/students/:studentId (update a student)
 studentRouter.put('/:studentId', (req, res, next) => {
+  console.log('entering route', req.params.studentId);
   Student.findById(req.params.studentId)
     .then(student => student.update(req.body))
-    .then(res.status(204).end())
+    .then(response => res.send(response.dataValues))
     .catch(next);
 });
 

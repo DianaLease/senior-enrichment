@@ -24,6 +24,7 @@ class SingleCampus extends Component {
       return (
         <div className="Name">
           <h2>{this.state.selectedCampus.name}</h2>
+          <img src={this.state.selectedCampus.imgUrl} />
           <h3>{this.state.selectedCampus.description}</h3>
         <h3>Student Roster</h3>
           <div>

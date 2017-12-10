@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const GET_STUDENTS = 'GET_STUDENTS';
-const GET_STUDENT = 'GET_STUDENT';
+const UPDATE_STUDENT = 'UPDATE_STUDENT';
+const ADD_STUDENT = 'ADD_STUDENT';
 
 // ACTION CREATOR
 
@@ -12,9 +13,16 @@ export const getStudents = (students) => {
   }
 }
 
-export const getStudent = (student) => {
+export const updateStudent = (student) => {
   return {
-    type: GET_STUDENT,
+    type: UPDATE_STUDENT,
+    student
+  };
+}
+
+export const addStudent = (student) => {
+  return {
+    type: ADD_STUDENT,
     student
   };
 }
@@ -31,13 +39,35 @@ export const fetchStudents = () => {
   }
 }
 
+// export const fetchStudent = (studentId) => {
+//   return function thunk(dispatch) {
+//     axios.get(`/api/students/${studentId}`)
+//       .then(res => res.data)
+//       .then(student => {
+//         dispatch(updateStudent(student))
+//     })
+//   }
+// }
+
 export const postStudent = (student, history) => {
   return function thunk(dispatch) {
     return axios.post('/api/students', student)
       .then(res => res.data)
       .then(newStudent => {
-        dispatch(getStudent(newStudent));
+        dispatch(addStudent(newStudent));
         history.push(`/students/${newStudent.id}`)
+    })
+  }
+}
+
+export const putStudent = (data, history) => {
+  return function thunk(dispatch) {
+    return axios.put(`/api/students/${data.id}`, data)
+      .then(res => res.data)
+      .then(student => {
+        console.log("existing thunk", student, "hiiiii");
+        dispatch(updateStudent(student));
+        history.push(`/students/${student.id}`)
     })
   }
 }
@@ -48,7 +78,15 @@ const studentsReducer = (state = [], action) => {
   switch (action.type) {
     case GET_STUDENTS:
       return action.students
-    case GET_STUDENT:
+    case UPDATE_STUDENT:
+      return state.reduce((accum, curr) => {
+        if (curr.id === action.student.id) {
+          return accum.concat(action.student)
+        } else {
+          return accum.concat(curr)
+        }
+      }, [])
+    case ADD_STUDENT:
       return [...state, action.student]
     default:
       return state;

@@ -20,7 +20,6 @@ class SingleStudent extends Component {
   }
 
   render() {
-    console.log(this.state.selectedStudent.campus)
     if (this.state.selectedStudent.campus) {
       return (
         <div className="Name">
@@ -32,8 +31,11 @@ class SingleStudent extends Component {
             {this.state.selectedStudent.campus.name}
           </NavLink>
           </h3>
-
-
+          <button>
+            <NavLink to={`/students/${this.state.selectedStudent.id}/edit`} >
+              Edit this student
+            </NavLink>
+          </button>
         </div>
       )
     } else {
