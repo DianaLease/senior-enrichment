@@ -17,7 +17,6 @@ studentRouter.get('/:studentId', (req, res, next) => {
 
 // POST /api/students (create new student)
 studentRouter.post('/', (req, res, next) => {
-  console.log('entering route', req.body)
   Student.create(req.body)
     .then(student => res.status(201).send(student))
     .catch(next);
@@ -36,7 +35,7 @@ studentRouter.put('/:studentId', (req, res, next) => {
 studentRouter.delete('/:studentId', (req, res, next) => {
   Student.findById(req.params.studentId)
     .then(student => student.destroy())
-    .then(res.status(204).redirect('/api/students'))
+    .then(res.sendStatus(204))
     .catch(next);
 });
 

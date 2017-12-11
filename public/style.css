@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(94, 134, 139);
+}
+
+h1 {
+  color: #ffffff;
+}
+
+h2 {
+  color: #000000;
+}
+
+h1,
+h2,
+h3,
+nav {
+  font-family: "Saira Extra Condensed", sans-serif;
+}
+
+.nav-button {
+  background-color: rgb(199, 199, 199);
+  margin: 20px 10px;
+  height: 5em;
+  width: 14em;
+}
+
+.navbar {
+  background-color: rgba(37, 37, 37, 0.8);
+  display: flex;
+  z-index: 2;
+  padding: 5px;
+}
+
+.addNew {
+  margin: 20px;
+  border-radius: 5px
+}

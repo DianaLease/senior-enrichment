@@ -24,6 +24,11 @@ class SingleCampus extends Component {
       return (
         <div className="Name">
           <h2>{this.state.selectedCampus.name}</h2>
+          <button>
+            <NavLink to={`/campuses/${this.state.selectedCampus.id}/edit`} >
+              Edit this campus
+            </NavLink>
+          </button>
           <img src={this.state.selectedCampus.imgUrl} />
           <h3>{this.state.selectedCampus.description}</h3>
         <h3>Student Roster</h3>

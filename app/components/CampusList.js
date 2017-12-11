@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchCampuses } from '../reducers/campusesReducer';
+import { fetchCampuses, destroyCampus } from '../reducers/campusesReducer';
 
 class CampusList extends Component {
 
@@ -9,23 +9,30 @@ class CampusList extends Component {
     this.props.getCampuses();
   }
 
+  handleDelete(campusId) {
+    this.props.deleteCampus(campusId);
+  }
+
   render() {
     return (
       <div>
-        <button id="addCampus">
-          <NavLink to="/new-campus">
-            Add New Campus
-          </NavLink>
-        </button>
+        <NavLink to="/new-campus">
+          <button className="addNew">
+            <h3>Add New Campus</h3>
+          </button>
+        </NavLink>
         <ul>
           {
             this.props.campuses.map((campus) => {
               return (
-                <h2 key={campus.id} className="list">
+                <div key={campus.id}>
+                <h2 className="list">
                   <NavLink to={`/campuses/${campus.id}`}>
                     {campus.name}
                   </NavLink>
-                </h2>
+                  </h2>
+                  <button onClick={() => this.handleDelete(campus.id)}>X</button>
+                </div>
               )
             })
           }
@@ -38,14 +45,17 @@ class CampusList extends Component {
 
 const mapStateToProps = (storeState) => {
   return {
-    campuses: storeState.campuses
+    campuses: storeState.campuses.campuses
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getCampuses: function () {
       dispatch(fetchCampuses());
+    },
+    deleteCampus: function (campusId) {
+      dispatch(destroyCampus(campusId))
     }
   }
 }

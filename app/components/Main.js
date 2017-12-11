@@ -9,6 +9,7 @@ import SingleStudent from './SingleStudent';
 import NewStudent from './NewStudent';
 import NewCampus from './NewCampus';
 import EditStudent from './EditStudent';
+import EditCampus from './EditCampus';
 
 
 const Main = () => {
@@ -18,12 +19,13 @@ const Main = () => {
       <Navbar />
       <Switch>
         <Route exact path="/campuses" component={CampusList} />
-        <Route path="/campuses/:campusId" component={SingleCampus} />
+        <Route exact path="/campuses/:campusId" component={SingleCampus} />
         <Route exact path="/students" component={StudentList} />
         <Route exact path="/students/:studentId" component={SingleStudent} />
         <Route path="/new-student" component={NewStudent} />
         <Route path="/new-campus" component={NewCampus} />
         <Route path="/students/:studentId/edit" component={EditStudent} />
+        <Route path="/campuses/:campusId/edit" component={EditCampus} />
       </Switch>
     </div>
   )

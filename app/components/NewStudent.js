@@ -93,7 +93,7 @@ class NewStudent extends Component {
             <input
               type="text"
               onChange={this.changeEmail}
-              name="lastName"
+              name="email"
               placeholder="Enter email"
             />
           </label>
@@ -103,7 +103,7 @@ class NewStudent extends Component {
             <input
               type="text"
               onChange={this.changeGPA}
-              name="lastName"
+              name="gpa"
               placeholder="Enter GPA"
             />
           </label>
@@ -133,7 +133,7 @@ class NewStudent extends Component {
 
 const mapStateToProps = (storeState) => {
   return {
-    campuses: storeState.campuses
+    campuses: storeState.campuses.campuses
   };
 }
 

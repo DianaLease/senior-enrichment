@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStudents } from '../reducers/studentsReducer';
+import { fetchStudents, destroyStudent } from '../reducers/studentsReducer';
 
 class StudentList extends Component {
 
@@ -9,23 +9,31 @@ class StudentList extends Component {
     this.props.getStudents();
   }
 
+
+  handleDelete(studentId) {
+    this.props.deleteStudent(studentId);
+  }
+
   render() {
     return (
       <div>
-        <button id="addStudent">
-          <NavLink to="/new-student">
-          Add New Student
-          </NavLink>
-        </button>
+        <NavLink to="/new-student">
+          <button className="addNew">
+            <h3>Add New Student</h3>
+          </button>
+        </NavLink>
         <ul>
           {
             this.props.students.map((student) => {
               return (
-                <h2 key={student.id} className="list">
-                  <NavLink to={`/students/${student.id}`}>
+                <div key={student.id} className="list">
+                  <h2>
+                    <NavLink to={`/students/${student.id}`}>
                     {student.name}
-                  </NavLink>
-                </h2>
+                    </NavLink>
+                  </h2>
+                  <button onClick={ () => this.handleDelete(student.id)}>X</button>
+                </div>
               )
             })
           }
@@ -38,14 +46,17 @@ class StudentList extends Component {
 
 const mapStateToProps = (storeState) => {
   return {
-    students: storeState.students
+    students: storeState.students.students
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getStudents: function () {
       dispatch(fetchStudents());
+    },
+    deleteStudent: function (studentId) {
+      dispatch(destroyStudent(studentId))
     }
   }
 }

@@ -17,7 +17,6 @@ campusRouter.get('/:campusId', (req, res, next) => {
 
 // POST /api/campuses (create new campus)
 campusRouter.post('/', (req, res, next) => {
-  console.log(req.body);
   Campus.create(req.body)
     .then(campus => res.status(201).send(campus))
     .catch(next);
@@ -27,7 +26,7 @@ campusRouter.post('/', (req, res, next) => {
 campusRouter.put('/:campusId', (req, res, next) => {
   Campus.findById(req.params.campusId)
     .then(campus => campus.update(req.body))
-    .then(res.status(204).end())
+    .then(response => res.send(response.dataValues))
     .catch(next);
 });
 
@@ -35,7 +34,7 @@ campusRouter.put('/:campusId', (req, res, next) => {
 campusRouter.delete('/:campusId', (req, res, next) => {
   Campus.findById(req.params.campusId)
     .then(campus => campus.destroy())
-    .then(res.status(204).redirect('/api/campuses'))
+    .then(res.sendStatus(204))
     .catch(next);
 });
 

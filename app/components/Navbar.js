@@ -5,17 +5,22 @@ import { NavLink } from 'react-router-dom';
 function Navbar (props) {
 
     return (
-        <div className="Navbar">
-        <button className="nav-button">
+        <div className="navbar">
+          <NavLink to={`/`}>
+            <button className="nav-button">
+            <h2>Home</h2>
+            </button>
+          </NavLink>
           <NavLink to={`/campuses`}>
-            <h2>Campuses</h2>
+            <button className="nav-button">
+              <h2>Campuses</h2>
+            </button>
           </NavLink>
-        </button>
-        <button className="nav-button">
           <NavLink to={`/students`}>
-            <h2>Students</h2>
+            <button className="nav-button">
+              <h2>Students</h2>
+            </button>
           </NavLink>
-        </button>
           <h1>Margaret Hamilton Interplanetary Academy of JavaScript</h1>
         </div>
     );

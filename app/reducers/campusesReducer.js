@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_CAMPUS = 'GET_CAMPUS';
+const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
+const DELETE_CAMPUS = 'DELETE_CAMPUS';
 
 // ACTION CREATORS
 
@@ -15,6 +17,20 @@ export const getCampuses = (campuses) => {
 export const getCampus = (campus) => {
   return {
     type: GET_CAMPUS,
+    campus
+  };
+}
+
+export const updateCampus = (campus) => {
+  return {
+    type: UPDATE_CAMPUS,
+    campus
+  };
+}
+
+export const deleteCampus = (campus) => {
+  return {
+    type: DELETE_CAMPUS,
     campus
   };
 }
@@ -42,14 +58,47 @@ export const postCampus = (campus, history) => {
   }
 }
 
+export const putCampus = (data, history) => {
+  return function thunk(dispatch) {
+    return axios.put(`/api/campuses/${data.id}`, data)
+      .then(res => res.data)
+      .then(campus => {
+        dispatch(updateCampus(campus));
+        history.push(`/campuses/${campus.id}`)
+      })
+  }
+}
+
+export const destroyCampus = (campusId) => {
+  return function thunk(dispatch) {
+    return axios.delete(`/api/campuses/${campusId}`)
+      .then(res => res.data)
+      .then(() => {
+        dispatch(deleteCampus(campusId));
+      })
+  }
+}
+
 // REDUCER
 
-const campusesReducer = (state = [], action) => {
+const initialState = {
+  campuses: [],
+  campus: {}
+}
+
+const campusesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_CAMPUSES:
-      return action.campuses
+      return Object.assign({}, state, { campuses: action.campuses })
+    case UPDATE_CAMPUS:
+      return Object.assign({}, state, { campus: action.campus })
     case GET_CAMPUS:
-      return [...state, action.campus]
+      return Object.assign({}, state, { campus: action.campus })
+    case DELETE_CAMPUS:
+      return Object.assign({}, state, {
+        campuses:
+          state.campuses.filter((data) => data.id !== action.campus)
+      })
     default:
       return state;
   }

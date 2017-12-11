@@ -3,8 +3,9 @@ import axios from 'axios';
 const GET_STUDENTS = 'GET_STUDENTS';
 const UPDATE_STUDENT = 'UPDATE_STUDENT';
 const ADD_STUDENT = 'ADD_STUDENT';
+const DELETE_STUDENT = 'DELETE_STUDENT';
 
-// ACTION CREATOR
+// ACTIONS
 
 export const getStudents = (students) => {
   return {
@@ -26,6 +27,15 @@ export const addStudent = (student) => {
     student
   };
 }
+
+export const deleteStudent = (student) => {
+  return {
+    type: DELETE_STUDENT,
+    student
+  };
+}
+
+
 
 // THUNK
 
@@ -65,29 +75,42 @@ export const putStudent = (data, history) => {
     return axios.put(`/api/students/${data.id}`, data)
       .then(res => res.data)
       .then(student => {
-        console.log("existing thunk", student, "hiiiii");
         dispatch(updateStudent(student));
         history.push(`/students/${student.id}`)
     })
   }
 }
 
+export const destroyStudent = (studentId) => {
+  return function thunk(dispatch) {
+    return axios.delete(`/api/students/${studentId}`)
+      .then(res => res.data)
+      .then(() => {
+        dispatch(deleteStudent(studentId));
+      })
+  }
+}
+
 // REDUCER
 
-const studentsReducer = (state = [], action) => {
+const initialState = {
+  students: [],
+  student: {}
+}
+
+const studentsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_STUDENTS:
-      return action.students
+      return Object.assign({}, state, { students: action.students })
     case UPDATE_STUDENT:
-      return state.reduce((accum, curr) => {
-        if (curr.id === action.student.id) {
-          return accum.concat(action.student)
-        } else {
-          return accum.concat(curr)
-        }
-      }, [])
+      return Object.assign({}, state, { student: action.student })
     case ADD_STUDENT:
-      return [...state, action.student]
+      return Object.assign({}, state, { student: action.student })
+    case DELETE_STUDENT:
+      return Object.assign({}, state, {
+        students:
+          state.students.filter((data) => data.id !== action.student)
+      })
     default:
       return state;
   }

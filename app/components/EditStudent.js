@@ -70,7 +70,6 @@ class EditStudent extends Component {
       gpa: (this.state.gpa) ? this.state.gpa : this.props.student.gpa,
       campusId: (this.state.campusId) ? this.state.campusId : this.props.student.campusId
     }
-    console.log("student edited", editedStudent)
     alert('Student was edited.');
     this.props.handleSubmit(event, editedStudent);
   }
@@ -149,10 +148,9 @@ class EditStudent extends Component {
 }
 
 const mapStateToProps = (storeState, ownProps) => {
-  console.log(storeState, '______', ownProps);
   return {
-    campuses: storeState.campuses,
-    student: storeState.students.filter((student) => student.id === parseInt(ownProps.match.params.studentId))[0]
+    campuses: storeState.campuses.campuses,
+    student: storeState.students.students.filter((student) => student.id === parseInt(ownProps.match.params.studentId))[0]
   };
 }
 
@@ -172,6 +170,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 
-const editStudentContainer = connect(mapStateToProps, mapDispatchToProps)(EditStudent);
+const EditStudentContainer = connect(mapStateToProps, mapDispatchToProps)(EditStudent);
 
-export default editStudentContainer;
+export default EditStudentContainer;
