@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 
-function Navbar (props) {
+function Navbar () {
 
     return (
         <div className="navbar">

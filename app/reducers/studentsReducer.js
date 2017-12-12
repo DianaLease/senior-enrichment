@@ -49,16 +49,6 @@ export const fetchStudents = () => {
   }
 }
 
-// export const fetchStudent = (studentId) => {
-//   return function thunk(dispatch) {
-//     axios.get(`/api/students/${studentId}`)
-//       .then(res => res.data)
-//       .then(student => {
-//         dispatch(updateStudent(student))
-//     })
-//   }
-// }
-
 export const postStudent = (student, history) => {
   return function thunk(dispatch) {
     return axios.post('/api/students', student)

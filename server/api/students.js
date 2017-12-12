@@ -24,14 +24,14 @@ studentRouter.post('/', (req, res, next) => {
 
 // PUT /api/students/:studentId (update a student)
 studentRouter.put('/:studentId', (req, res, next) => {
-  console.log('entering route', req.params.studentId);
+
   Student.findById(req.params.studentId)
     .then(student => student.update(req.body))
     .then(response => res.send(response.dataValues))
     .catch(next);
 });
 
-// DELETE /api/students/:studentId (delete a student) TODO: maybe not redirect?
+// DELETE /api/students/:studentId (delete a student)
 studentRouter.delete('/:studentId', (req, res, next) => {
   Student.findById(req.params.studentId)
     .then(student => student.destroy())

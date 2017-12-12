@@ -30,7 +30,7 @@ campusRouter.put('/:campusId', (req, res, next) => {
     .catch(next);
 });
 
-// DELETE /api/campuses/:campusId (delete a campus) TODO: maybe not redirect?
+// DELETE /api/campuses/:campusId (delete a campus)
 campusRouter.delete('/:campusId', (req, res, next) => {
   Campus.findById(req.params.campusId)
     .then(campus => campus.destroy())
@@ -38,7 +38,6 @@ campusRouter.delete('/:campusId', (req, res, next) => {
     .catch(next);
 });
 
-// TODO As a user I can edit a campus's info, including adding/removing a student to/from that campus. Might need to use eager loading in the put route??
 
 
 module.exports = campusRouter;

@@ -50,7 +50,6 @@ class EditCampus extends Component {
       imgUrl: (this.state.imgUrl) ? this.state.imgUrl : this.props.campus.imgUrl,
       description: (this.state.description) ? this.state.description : this.props.campus.description
     }
-    console.log('edited campus', editedCampus);
     alert('The campus was edited.');
     this.props.handleSubmit(event, editedCampus);
   }
@@ -66,7 +65,7 @@ class EditCampus extends Component {
                 type="text"
                 onChange={this.changeName}
                 name="name"
-                placeholder={this.props.campus.name || 'Enter name'}
+                defaultValue={this.props.campus.name || 'Enter name'}
               />
             </label>
           </div>
@@ -76,7 +75,7 @@ class EditCampus extends Component {
                 type="text"
                 onChange={this.changeImgUrl}
                 name="imgUrl"
-                placeholder={this.props.campus.imgUrl || 'Enter image URL'}
+                defaultValue={this.props.campus.imgUrl || 'Enter image URL'}
               />
             </label>
           </div>
@@ -86,7 +85,7 @@ class EditCampus extends Component {
                 type="text"
                 onChange={this.changeDescription}
                 name="email"
-                placeholder={this.props.campus.description || 'Enter description'}
+                defaultValue={this.props.campus.description || 'Enter description'}
               />
             </label>
           </div>

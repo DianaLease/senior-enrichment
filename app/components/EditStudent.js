@@ -61,7 +61,7 @@ class EditStudent extends Component {
   }
 
   onSubmit(event) {
-    console.log(this.props)
+
     let editedStudent = {
       id: this.props.student.id,
       firstName: (this.state.firstName) ? this.state.firstName : this.props.student.firstName,
@@ -70,6 +70,7 @@ class EditStudent extends Component {
       gpa: (this.state.gpa) ? this.state.gpa : this.props.student.gpa,
       campusId: (this.state.campusId) ? this.state.campusId : this.props.student.campusId
     }
+
     alert('Student was edited.');
     this.props.handleSubmit(event, editedStudent);
   }
@@ -85,7 +86,7 @@ class EditStudent extends Component {
                 type="text"
                 onChange={this.changeFirstName}
                 name="firstName"
-                placeholder={this.props.student.firstName || 'Enter first name'}
+                defaultValue={this.props.student.firstName || 'Enter first name'}
               />
             </label>
           </div>
@@ -95,7 +96,7 @@ class EditStudent extends Component {
                 type="text"
                 onChange={this.changeLastName}
                 name="lastName"
-                placeholder={this.props.student.lastName || 'Enter last name'}
+                defaultValue={this.props.student.lastName || 'Enter last name'}
               />
             </label>
           </div>
@@ -105,7 +106,7 @@ class EditStudent extends Component {
                 type="text"
                 onChange={this.changeEmail}
                 name="email"
-                placeholder={this.props.student.email || 'Enter email'}
+                defaultValue={this.props.student.email || 'Enter email'}
               />
             </label>
           </div>
@@ -115,7 +116,7 @@ class EditStudent extends Component {
                 type="text"
                 onChange={this.changeGPA}
                 name="gpa"
-                placeholder={this.props.student.gpa || 'Enter GPA'}
+                defaultValue={this.props.student.gpa || 'Enter GPA'}
               />
             </label>
           </div>
